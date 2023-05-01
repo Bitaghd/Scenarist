@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.Toast
 
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -24,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
         val navController = navHostFragment.navController
         setupActionBarWithNavController(navController)
@@ -59,5 +60,10 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    public fun replaceFragment(){
+        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        when(item.itemID){item ->
 
+        }
+    }
 }

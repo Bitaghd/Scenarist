@@ -31,7 +31,13 @@ class ProjectDetailsFragment : Fragment() {
 
         binding.bottomNavigation.setOnItemSelectedListener {item ->
             when (item.itemId){
-                R.id.project_home -> findNavController().navigate(R.id.projectDetailsFragment)
+                R.id.project_home -> {
+                    val action =
+                    findNavController().navigate(R.id.projectDetailsFragment)
+                }
+                R.id.scenes ->{
+                    findNavController().navigate(R.id.action_updateFragment_to_mainFragment)
+                }
 
 
             }
