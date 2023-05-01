@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/project_home"
+        android:icon="@drawable/ic_about"
+        android:title="Details" />
+
+    <item
+        android:id="@+id/scenes"
+        android:icon="@drawable/ic_scenes"
+        android:title="Scenes" />
+
+    <item
+        android:id="@+id/locations"
+        android:icon="@drawable/ic_locations"
+        android:title="Locations"/>
+    <item
+        android:id="@+id/characters"
+        android:icon="@drawable/ic_characters"
+        android:title="Characters"/>
+
+    <item
+        android:id="@+id/details"
+        android:icon="@drawable/ic_details"
+        android:title="Details"/>
+</menu>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_bottom_nav"
+    app:startDestination="@id/projectDetailsFragment2">
+
+    <fragment
+        android:id="@+id/projectDetailsFragment2"
+        android:name="com.example.myapplication.fragments.main.project_details.ProjectDetailsFragment"
+        android:label="fragment_project_details"
+        tools:layout="@layout/fragment_project_details" >
+        <action
+            android:id="@+id/action_projectDetailsFragment2_to_sceneFragment"
+            app:destination="@id/sceneFragment" />
+        <action
+            android:id="@+id/action_projectDetailsFragment2_to_locationFragment"
+            app:destination="@id/locationFragment" />
+        <action
+            android:id="@+id/action_projectDetailsFragment2_to_characterFragment"
+            app:destination="@id/characterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sceneFragment"
+        android:name="com.example.myapplication.SceneFragment"
+        android:label="fragment_scene"
+        tools:layout="@layout/fragment_scene" >
+        <action
+            android:id="@+id/action_sceneFragment_to_projectDetailsFragment2"
+            app:destination="@id/projectDetailsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.example.myapplication.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" >
+        <action
+            android:id="@+id/action_locationFragment_to_projectDetailsFragment2"
+            app:destination="@id/projectDetailsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterFragment"
+        android:name="com.example.myapplication.CharacterFragment"
+        android:label="fragment_character"
+        tools:layout="@layout/fragment_character" >
+        <action
+            android:id="@+id/action_characterFragment_to_projectDetailsFragment2"
+            app:destination="@id/projectDetailsFragment2" />
+    </fragment>
+</navigation>
