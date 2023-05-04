@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.model.Projects
 import com.example.myapplication.databinding.ProjectRawBinding
-import com.example.myapplication.fragments.update.UpdateFragmentArgs
 import com.example.myapplication.viewmodel.DataViewModel
 
 class MainAdapter(val listener: RawClickListener):RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
@@ -32,7 +31,7 @@ class MainAdapter(val listener: RawClickListener):RecyclerView.Adapter<MainAdapt
         val currentItem = projectsList[position]
         holder.binding.projectNameTxt.text = currentItem.pr_name
         holder.binding.rawLayout.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToProjectDetailsFragment(currentItem)
+            val action = MainFragmentDirections.actionMainFragmentToSupportFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
         }
         holder.binding.deleteProjectID.setOnClickListener{

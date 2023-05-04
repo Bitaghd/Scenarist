@@ -14,8 +14,8 @@
             android:id="@+id/action_mainFragment_to_addProjectFragment"
             app:destination="@id/addProjectFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_projectDetailsFragment"
-            app:destination="@id/projectDetailsFragment" />
+            android:id="@+id/action_mainFragment_to_supportFragment"
+            app:destination="@id/supportFragment" />
     </fragment>
     <fragment
         android:id="@+id/addProjectFragment"
@@ -27,31 +27,13 @@
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
-        android:id="@+id/updateFragment"
-        android:name="com.example.myapplication.fragments.update.UpdateFragment"
-        android:label="Update"
-        tools:layout="@layout/fragment_update" >
+        android:id="@+id/supportFragment"
+        android:name="com.example.myapplication.SupportFragment"
+        android:label="fragment_support"
+        tools:layout="@layout/fragment_support" >
         <action
-            android:id="@+id/action_updateFragment_to_projectDetailsFragment"
-            app:destination="@id/projectDetailsFragment" />
-        <argument
-            android:name="currentProject"
-            app:argType="com.example.myapplication.model.Projects" />
-        <action
-            android:id="@+id/action_updateFragment_to_mainFragment"
+            android:id="@+id/action_supportFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/projectDetailsFragment"
-        android:name="com.example.myapplication.fragments.main.project_details.ProjectDetailsFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_project_details" >
-        <action
-            android:id="@+id/action_projectDetailsFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-        <action
-            android:id="@+id/action_projectDetailsFragment_to_updateFragment"
-            app:destination="@id/updateFragment" />
         <argument
             android:name="currentProject"
             app:argType="com.example.myapplication.model.Projects" />

@@ -60,10 +60,10 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    public fun replaceFragment(){
-        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        when(item.itemID){item ->
-
-        }
-    }
+//    public fun replaceFragment(){
+//        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+//        when(item.itemID){item ->
+//
+//        }
+//    }
 }

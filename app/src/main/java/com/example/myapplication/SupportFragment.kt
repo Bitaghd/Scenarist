@@ -6,13 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.databinding.FragmentProjectDetailsBinding
 import com.example.myapplication.databinding.FragmentSupportBinding
 import com.example.myapplication.fragments.main.project_details.ProjectDetailsFragment
+import com.example.myapplication.viewmodel.DataViewModel
 
 
 class SupportFragment : Fragment() {
+    private val arg by navArgs<SupportFragmentArgs>()
     private var _binding: FragmentSupportBinding? = null
+    lateinit var viewModel : DataViewModel
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,24 +29,37 @@ class SupportFragment : Fragment() {
     ): View {
          //Inflate the layout for this fragment
         _binding =  FragmentSupportBinding.inflate(inflater, container, false)
-        replaceFragment()
+        viewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+        //replaceFragment()
+
+        viewModel.readAllProjects.observe(viewLifecycleOwner, {projects ->
+            findNavController().navigate(R.id.projectDetailsFragment(projects))
+
+        })
+
         return binding.root
     }
 
-    private fun replaceFragment(){
-        var fragment: Fragment? = null
-          //val fragmentTransaction = fragmentManager.beginTransaction()
-        (MainActivity)
-        binding.bottomNav.setOnItemSelectedListener {item ->
-            when(item.itemId){
-                R.id.projectDetailsFragment -> {
-                    fragment = ProjectDetailsFragment()
-                }
-                R.id.locationFragment
-            }
-
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val navHostFragment = childFragmentManager.findFragmentById(R.id.support) as NavHostFragment
+        val navController = navHostFragment.findNavController()
+        binding.bottomNav.setupWithNavController(navController)
     }
+//    private fun replaceFragment(){
+//        var fragment: Fragment? = null
+//          //val fragmentTransaction = fragmentManager.beginTransaction()
+//        (MainActivity)
+//        binding.bottomNav.setOnItemSelectedListener {item ->
+//            when(item.itemId){
+//                R.id.projectDetailsFragment -> {
+//                    fragment = ProjectDetailsFragment()
+//                }
+//                R.id.locationFragment
+//            }
+//
+//        }
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

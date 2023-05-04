@@ -26,7 +26,7 @@ import com.example.myapplication.viewmodel.DataViewModel
 class UpdateFragment : Fragment() {
     private var _binding: FragmentUpdateBinding? = null
     private val binding get() = _binding!!
-    private val args by navArgs<UpdateFragmentArgs>()
+    //private val args by navArgs<UpdateFragmentArgs>()
     private lateinit var mProjectViewModel: DataViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,7 +78,7 @@ class UpdateFragment : Fragment() {
                 requireContext(),
                 "${args.currentProject.pr_name} successfully deleted!",
                 Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_updateFragment_to_mainFragment)
+            findNavController().navigate(R.id.mainFragment)
         }
         builder.setNegativeButton("No"){_, _->
 

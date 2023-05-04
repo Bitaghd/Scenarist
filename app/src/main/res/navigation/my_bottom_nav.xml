@@ -3,22 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_bottom_nav"
-    app:startDestination="@id/projectDetailsFragment2">
-
+    app:startDestination="@id/projectDetailsFragment">
     <fragment
-        android:id="@+id/projectDetailsFragment2"
+        android:id="@+id/projectDetailsFragment"
         android:name="com.example.myapplication.fragments.main.project_details.ProjectDetailsFragment"
         android:label="fragment_project_details"
         tools:layout="@layout/fragment_project_details" >
         <action
-            android:id="@+id/action_projectDetailsFragment2_to_sceneFragment"
+            android:id="@+id/action_projectDetailsFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+        <action
+            android:id="@+id/action_projectDetailsFragment_to_sceneFragment"
             app:destination="@id/sceneFragment" />
         <action
-            android:id="@+id/action_projectDetailsFragment2_to_locationFragment"
+            android:id="@+id/action_projectDetailsFragment_to_locationFragment"
             app:destination="@id/locationFragment" />
         <action
-            android:id="@+id/action_projectDetailsFragment2_to_characterFragment"
+            android:id="@+id/action_projectDetailsFragment_to_characterFragment"
             app:destination="@id/characterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.myapplication.fragments.update.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_projectDetailsFragment"
+            app:destination="@id/projectDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/sceneFragment"
@@ -26,8 +37,8 @@
         android:label="fragment_scene"
         tools:layout="@layout/fragment_scene" >
         <action
-            android:id="@+id/action_sceneFragment_to_projectDetailsFragment2"
-            app:destination="@id/projectDetailsFragment2" />
+            android:id="@+id/action_sceneFragment_to_projectDetailsFragment"
+            app:destination="@id/projectDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/locationFragment"
@@ -35,8 +46,8 @@
         android:label="fragment_location"
         tools:layout="@layout/fragment_location" >
         <action
-            android:id="@+id/action_locationFragment_to_projectDetailsFragment2"
-            app:destination="@id/projectDetailsFragment2" />
+            android:id="@+id/action_locationFragment_to_projectDetailsFragment"
+            app:destination="@id/projectDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/characterFragment"
@@ -44,7 +55,7 @@
         android:label="fragment_character"
         tools:layout="@layout/fragment_character" >
         <action
-            android:id="@+id/action_characterFragment_to_projectDetailsFragment2"
-            app:destination="@id/projectDetailsFragment2" />
+            android:id="@+id/action_characterFragment_to_projectDetailsFragment"
+            app:destination="@id/projectDetailsFragment" />
     </fragment>
 </navigation>
