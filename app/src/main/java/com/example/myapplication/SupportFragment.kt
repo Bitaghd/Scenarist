@@ -31,11 +31,10 @@ class SupportFragment : Fragment() {
         _binding =  FragmentSupportBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(DataViewModel::class.java)
         //replaceFragment()
-
-        viewModel.readAllProjects.observe(viewLifecycleOwner, {projects ->
-            findNavController().navigate(R.id.projectDetailsFragment(projects))
-
-        })
+//        viewModel.readAllProjects.observe(viewLifecycleOwner, {projects ->
+//            findNavController().navigate(R.id.projectDetailsFragment)
+//
+//        })
 
         return binding.root
     }
@@ -45,6 +44,31 @@ class SupportFragment : Fragment() {
         val navHostFragment = childFragmentManager.findFragmentById(R.id.support) as NavHostFragment
         val navController = navHostFragment.findNavController()
         binding.bottomNav.setupWithNavController(navController)
+//        binding.bottomNav.setOnItemSelectedListener {item->
+//            when(item.itemId){
+//                R.id.project_home ->{
+//                    findNavController().navigate(R.id.projectDetailsFragment)
+//                    return@setOnItemSelectedListener true
+//                }
+//                R.id.scenes ->{
+//                    findNavController().navigate(R.id.sceneFragment)
+//                    //findNavController().navigate(R.id.action_projectDetailsFragment_to_sceneFragment)
+//                    return@setOnItemSelectedListener true
+//                }
+//
+//                R.id.locations->{
+//                    findNavController().navigate(R.id.locationFragment)
+//                    //findNavController().navigate(R.id.action_projectDetailsFragment_to_locationFragment)
+//                    return@setOnItemSelectedListener true
+//                }
+//                R.id.characters->{
+//                    findNavController().navigate(R.id.characterFragment)
+//                    //findNavController().navigate(R.id.action_projectDetailsFragment_to_characterFragment)
+//                    return@setOnItemSelectedListener true
+//                }
+//            }
+//            false
+//        }
     }
 //    private fun replaceFragment(){
 //        var fragment: Fragment? = null

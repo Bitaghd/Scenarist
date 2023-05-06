@@ -37,14 +37,16 @@ class ProjectDetailsFragment : Fragment() {
     }
 
     private fun setData(projects: List<Projects>?) {
-        this.projectsList = projects
+        if (projects != null) {
+            this.projectsList = projects
+        }
     }
 
-    private fun setTextsFromDatabase() {
-        binding.projectName.text = viewModel.
-        binding.author.text = currentProject.author_name
-        binding.date.text = args.currentProject.date.toString()
-    }
+//    private fun setTextsFromDatabase() {
+//        binding.projectName.text = projectsList.get()
+//        binding.author.text = currentProject.author_name
+//        binding.date.text = args.currentProject.date.toString()
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,9 +59,9 @@ class ProjectDetailsFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 if (menuItem.itemId == R.id.edit_menu){
-                    val action =
-                        ProjectDetailsFragmentDirections.actionProjectDetailsFragmentToUpdateFragment()
-                    findNavController().navigate(action)
+//                    val action =
+//                        ProjectDetailsFragmentDirections.actionProjectDetailsFragmentToUpdateFragment(proje)
+//                    findNavController().navigate(action)
                 }
                 return true
             }
