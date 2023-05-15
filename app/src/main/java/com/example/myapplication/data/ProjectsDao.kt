@@ -13,6 +13,8 @@ interface ProjectsDao {
 
     @Query("DELETE FROM projects")
     suspend fun deleteAllProjects()
+    @Query("SELECT * FROM projects WHERE projects.id = :id")
+    fun findProjectById(id: Int): LiveData<Projects>
     @Update
     suspend fun updateProject(projects: Projects)
     @Query("SELECT * FROM projects")

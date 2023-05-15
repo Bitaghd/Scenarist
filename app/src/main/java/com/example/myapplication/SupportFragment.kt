@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -30,6 +33,7 @@ class SupportFragment : Fragment() {
          //Inflate the layout for this fragment
         _binding =  FragmentSupportBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+        viewModel.setProject(arg.currentProject)
         //replaceFragment()
 //        viewModel.readAllProjects.observe(viewLifecycleOwner, {projects ->
 //            findNavController().navigate(R.id.projectDetailsFragment)
@@ -44,46 +48,19 @@ class SupportFragment : Fragment() {
         val navHostFragment = childFragmentManager.findFragmentById(R.id.support) as NavHostFragment
         val navController = navHostFragment.findNavController()
         binding.bottomNav.setupWithNavController(navController)
-//        binding.bottomNav.setOnItemSelectedListener {item->
-//            when(item.itemId){
-//                R.id.project_home ->{
-//                    findNavController().navigate(R.id.projectDetailsFragment)
-//                    return@setOnItemSelectedListener true
-//                }
-//                R.id.scenes ->{
-//                    findNavController().navigate(R.id.sceneFragment)
-//                    //findNavController().navigate(R.id.action_projectDetailsFragment_to_sceneFragment)
-//                    return@setOnItemSelectedListener true
-//                }
-//
-//                R.id.locations->{
-//                    findNavController().navigate(R.id.locationFragment)
-//                    //findNavController().navigate(R.id.action_projectDetailsFragment_to_locationFragment)
-//                    return@setOnItemSelectedListener true
-//                }
-//                R.id.characters->{
-//                    findNavController().navigate(R.id.characterFragment)
-//                    //findNavController().navigate(R.id.action_projectDetailsFragment_to_characterFragment)
-//                    return@setOnItemSelectedListener true
-//                }
-//            }
-//            false
-//        }
+
+        //val currentPr = viewModel.findProjectById(id)
+
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+            Navigation.findNavController(requireView()).navigateUp()
+            //findNavController().navigate(R.id.action_supportFragment_to_mainFragment)
+        }
     }
-//    private fun replaceFragment(){
-//        var fragment: Fragment? = null
-//          //val fragmentTransaction = fragmentManager.beginTransaction()
-//        (MainActivity)
-//        binding.bottomNav.setOnItemSelectedListener {item ->
-//            when(item.itemId){
-//                R.id.projectDetailsFragment -> {
-//                    fragment = ProjectDetailsFragment()
-//                }
-//                R.id.locationFragment
-//            }
-//
-//        }
-//    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -12,12 +12,16 @@ import kotlinx.coroutines.launch
 
 class DataViewModel(application:Application): AndroidViewModel(application) {
      val readAllProjects: LiveData<List<Projects>>
+     private val currentProject: Projects
+     //val getRecord: LiveData<Projects>
+     //val findProjectByID: LiveData<Projects> = repository.findProjectById(id)
     private val repository: ProjectsRepository
 
     init{
         val projectsDao = ProjectsDatabase.getDatabase(application).projectsDao()
         repository = ProjectsRepository(projectsDao)
         readAllProjects = repository.readAllProjects
+        //getRecord = repository.findProjectById(id)
     }
 
     fun addProjects(projects: Projects){
@@ -42,4 +46,19 @@ class DataViewModel(application:Application): AndroidViewModel(application) {
             repository.deleteAllProjects()
         }
     }
+
+    fun findProjectById(id: Int){
+        //getRecord = repository.findProjectById(id)
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.findProjectById(id)
+        }
+    }
+    fun getProject(): Projects {
+        return currentProject
+    }
+    fun setProject(projects: Projects){
+        currentProject = projects
+    }
+
+
 }

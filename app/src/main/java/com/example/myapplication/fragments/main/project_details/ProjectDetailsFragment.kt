@@ -18,6 +18,7 @@ import com.example.myapplication.viewmodel.DataViewModel
 
 class ProjectDetailsFragment : Fragment() {
     //private val args by navArgs<ProjectDetailsFragmentArgs>()
+    var currentProject: Projects? = null
     private var projectsList = emptyList<Projects>()
     private lateinit var viewModel: DataViewModel
     private var _binding: FragmentProjectDetailsBinding? = null
@@ -29,28 +30,20 @@ class ProjectDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentProjectDetailsBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(DataViewModel::class.java)
-        viewModel.readAllProjects.observe(viewLifecycleOwner, Observer {projects ->
-            setData(projects)
-        })
-
         return binding.root
     }
 
-    private fun setData(projects: List<Projects>?) {
-        if (projects != null) {
-            this.projectsList = projects
-        }
-    }
 
-//    private fun setTextsFromDatabase() {
-//        binding.projectName.text = projectsList.get()
-//        binding.author.text = currentProject.author_name
-//        binding.date.text = args.currentProject.date.toString()
-//    }
+    private fun setTextsFromDatabase() {
+        currentProject = viewModel.getProject()
+        binding.projectName.text = currentProject!!.pr_name
+        binding.author.text = currentProject!!.author_name
+        binding.date.text = currentProject!!.date.toString()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setTextsFromDatabase()
+        setTextsFromDatabase()
         val menuHost : MenuHost = requireActivity()
         menuHost.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

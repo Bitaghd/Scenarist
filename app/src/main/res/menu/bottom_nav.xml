@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/project_home"
+        android:id="@+id/projectDetailsFragment"
         android:icon="@drawable/ic_about"
-        android:title="Details" />
+        android:title="Main" />
 
     <item
-        android:id="@+id/scenes"
+        android:id="@+id/sceneFragment"
         android:icon="@drawable/ic_scenes"
         android:title="Scenes" />
 
     <item
-        android:id="@+id/locations"
+        android:id="@+id/locationFragment"
         android:icon="@drawable/ic_locations"
         android:title="Locations"/>
     <item
-        android:id="@+id/characters"
+        android:id="@+id/characterFragment"
         android:icon="@drawable/ic_characters"
         android:title="Characters"/>
 
