@@ -12,6 +12,7 @@ import androidx.core.text.isDigitsOnly
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -25,19 +26,20 @@ import com.example.myapplication.viewmodel.DataViewModel
 
 class UpdateFragment : Fragment() {
     private var _binding: FragmentUpdateBinding? = null
-    private val binding get() = _binding!!
     private val args by navArgs<UpdateFragmentArgs>()
-    private lateinit var mProjectViewModel: DataViewModel
+    //var currentProject: Projects? = null
+    private val binding get() = _binding!!
+    private lateinit var viewModel: DataViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mProjectViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(DataViewModel::class.java)
 
         _binding = FragmentUpdateBinding.inflate(inflater, container, false)
-        binding.updProjectName.setText(args.currentProject.pr_name)
-        binding.updProjectAuthor.setText(args.currentProject.author_name)
-        binding.updProjectDate.setText(args.currentProject.date.toString())
+//        binding.updProjectName.setText(args.currentProject.pr_name)
+//        binding.updProjectAuthor.setText(args.currentProject.author_name)
+//        binding.updProjectDate.setText(args.currentProject.date.toString())
 
         binding.updButton.setOnClickListener{
             updateItem()
@@ -48,39 +50,48 @@ class UpdateFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val setDataObserver = Observer<Projects>{project->
+            binding.updProjectName.setText(project.pr_name)
+            binding.updProjectAuthor.setText(project.author_name)
+            binding.updProjectDate.setText(project.date.toString())
+        }
+        viewModel.currentProject.observe(viewLifecycleOwner, setDataObserver)
+
+        //currentProject = viewModel.currentProject
         val menuHost : MenuHost = requireActivity()
 
-        menuHost.addMenuProvider(object:MenuProvider{
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.delete_menu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                if (menuItem.itemId == R.id.delete_menu){
-                    deleteProject()
-                }
-                return true
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+//        menuHost.addMenuProvider(object:MenuProvider{
+//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+//                menuInflater.inflate(R.menu.delete_menu, menu)
+//            }
+//
+//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+//                if (menuItem.itemId == R.id.delete_menu){
+//                    deleteProject()
+//                }
+//                return true
+//            }
+//        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun deleteProject() {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Yes"){_, _->
-            mProjectViewModel.deleteProject(args.currentProject)
-            Toast.makeText(
-                requireContext(),
-                "${args.currentProject.pr_name} successfully deleted!",
-                Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.mainFragment)
-        }
-        builder.setNegativeButton("No"){_, _->
 
-        }
-        builder.setTitle("Delete ${args.currentProject.pr_name}?")
-        builder.setMessage("Do you want to delete ${args.currentProject.pr_name}?")
-        builder.create().show()
-    }
+//    private fun deleteProject() {
+//        val builder = AlertDialog.Builder(requireContext())
+//        builder.setPositiveButton("Yes"){_, _->
+//            viewModel.deleteProject(args.currentProject)
+//            Toast.makeText(
+//                requireContext(),
+//                "${args.currentProject.pr_name} successfully deleted!",
+//                Toast.LENGTH_SHORT).show()
+//            findNavController().navigate(R.id.action_updateFragment_to_mainFragment2)
+//        }
+//        builder.setNegativeButton("No"){_, _->
+//
+//        }
+//        builder.setTitle("Delete ${args.currentProject.pr_name}?")
+//        builder.setMessage("Do you want to delete ${args.currentProject.pr_name}?")
+//        builder.create().show()
+//    }
 
     private fun updateItem(){
         val projectName = binding.updProjectName.text.toString()
@@ -91,7 +102,7 @@ class UpdateFragment : Fragment() {
             //Create project object
             val updatedProject = Projects(args.currentProject.id, projectName,authorName,date)
             //Update current project
-            mProjectViewModel.updateProject(updatedProject)
+            viewModel.updateProject(updatedProject)
             Toast.makeText(requireContext(), "Successfully updated!", Toast.LENGTH_LONG).show()
             //Navigate back
 //            val action = UpdateFragmentDirections.actionUpdateFragmentToProjectDetailsFragment(args.currentProject)

@@ -3,25 +3,25 @@ package com.example.myapplication.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.ProjectsDatabase
 import com.example.myapplication.repository.ProjectsRepository
 import com.example.myapplication.model.Projects
+import com.example.myapplication.model.Scene
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DataViewModel(application:Application): AndroidViewModel(application) {
      val readAllProjects: LiveData<List<Projects>>
-     private val currentProject: Projects
-     //val getRecord: LiveData<Projects>
-     //val findProjectByID: LiveData<Projects> = repository.findProjectById(id)
+     val currentProject: MutableLiveData<Projects> = MutableLiveData()
+
     private val repository: ProjectsRepository
 
     init{
         val projectsDao = ProjectsDatabase.getDatabase(application).projectsDao()
         repository = ProjectsRepository(projectsDao)
         readAllProjects = repository.readAllProjects
-        //getRecord = repository.findProjectById(id)
     }
 
     fun addProjects(projects: Projects){
@@ -47,18 +47,21 @@ class DataViewModel(application:Application): AndroidViewModel(application) {
         }
     }
 
-    fun findProjectById(id: Int){
-        //getRecord = repository.findProjectById(id)
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.findProjectById(id)
-        }
+    fun findProjectById(id: Int):LiveData<Projects>{
+        return repository.findProjectById(id)
     }
-    fun getProject(): Projects {
-        return currentProject
-    }
-    fun setProject(projects: Projects){
-        currentProject = projects
+    fun setCurrentItem(projects: Projects) {
+        currentProject.value = projects
+        //currentProject.postValue(projects)
     }
 
-
+    fun getScenesInProject(projectID: Int): LiveData<List<Scene>> {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            repository.getProjectWithScenes(projectID)
+//        }
+        return repository.getProjectWithScenes(projectID)
+    }
+    fun getProjectId(): Int {
+        return currentProject.value!!.id
+    }
 }
