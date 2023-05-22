@@ -107,7 +107,7 @@ class UpdateFragment : Fragment() {
             //Navigate back
 //            val action = UpdateFragmentDirections.actionUpdateFragmentToProjectDetailsFragment(args.currentProject)
 //            findNavController().navigate(action)
-            Navigation.findNavController(requireView()).navigateUp()
+            //Navigation.findNavController(requireView()).navigateUp()
         }
         else
         {

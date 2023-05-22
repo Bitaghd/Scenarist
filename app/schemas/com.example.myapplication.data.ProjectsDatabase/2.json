@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "4063b1c9efdbc8ec0214d376745b5b28",
+    "identityHash": "5f97940fd45b577316207bd5faaaa130",
     "entities": [
       {
         "tableName": "projects",
@@ -85,12 +85,56 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "location",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`location_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `location_name` TEXT NOT NULL, `location_scene` TEXT NOT NULL, `projectID` INTEGER NOT NULL, `image` BLOB NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "location_id",
+            "columnName": "location_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "location_name",
+            "columnName": "location_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "location_scene",
+            "columnName": "location_scene",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "projectID",
+            "columnName": "projectID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "BLOB",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "location_id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4063b1c9efdbc8ec0214d376745b5b28')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5f97940fd45b577316207bd5faaaa130')"
     ]
   }
 }

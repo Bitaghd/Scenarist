@@ -30,6 +30,7 @@ class ProjectDetailsFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentProjectDetailsBinding.inflate(inflater, container, false)
+
         viewModel = ViewModelProvider(requireActivity()).get(DataViewModel::class.java)
         return binding.root
     }

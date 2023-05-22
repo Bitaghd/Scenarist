@@ -25,7 +25,7 @@ class AddProjectFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAddProjectBinding.inflate(inflater, container, false)
 
-        mDataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+        mDataViewModel = ViewModelProvider(requireActivity()).get(DataViewModel::class.java)
         binding.addButton.setOnClickListener {
             insertDataToDatabase()
         }

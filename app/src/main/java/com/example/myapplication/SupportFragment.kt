@@ -49,10 +49,10 @@ class SupportFragment : Fragment() {
         //Setting the current item value
         viewModel.setCurrentItem(arg.currentProject)
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            Navigation.findNavController(requireView()).navigateUp()
-            //findNavController().navigate(R.id.action_supportFragment_to_mainFragment)
-        }
+//        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+//            Navigation.findNavController(requireView()).navigateUp()
+//            //findNavController().navigate(R.id.action_supportFragment_to_mainFragment)
+//        }
     }
     override fun onDestroyView() {
         super.onDestroyView()
