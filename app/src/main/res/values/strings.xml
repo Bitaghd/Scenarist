@@ -1,8 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Scenarist</string>
-    <string name="user_profile">Профиль</string>
-    <string name="main_screen">Главная</string>
+    <string name="user_profile">Profile</string>
+    <string name="main_screen">Main</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Settings</string>
+    <string name="sync_header">Sync</string>
+    <string name="settings">Settings</string>
+    <!-- Messages Preferences -->
+    <string name="signature_title">Language</string>
+    <string name="reply_title">Language</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+
+<!--    Image related-->
+    <string name="perms_denied">Permission denied</string>
+
+<!--    Update related-->
+    <string name="set_fields">Please fill out all fields!</string>
+    <string name="update_success">Successfully updated!</string>
+
+<!--    Adding related-->
+    <string name="add_success">Successfully added!</string>
+
+<!--    Deletion related-->
+    <string name="delete_success">successfully deleted!</string>
+    <string name="delete_yes">Delete</string>
+    <string name="delete_no">Cancel</string>
+    <string name="delete_confirm">Delete</string>
+    <string name="delete_desc">Do you want to delete</string>
+
+<!--    Drawable details related-->
+    <string name="name">Name:</string>
+    <string name="author">Author:</string>
+    <string name="date">Date:</string>
+    <string name="scene">Scene:</string>
+    <string name="location">Location:</string>
+    <string name="alias">Alias:</string>
+    <string name="image">Image:</string>
+    <string name="timing">Timing:</string>
+
+<!--    Headers-->
+    <string name="project_header">Project</string>
+    <string name="genres_header">Genres</string>
+    <string name="characters_header">Characters</string>
+    <string name="locations_header">Locations</string>
+    <string name="scene_header">Scenes</string>
+
+<!--    Hints-->
+    <string name="name_hint">Name</string>
+    <string name="author_hint">Author</string>
+    <string name="date_hint">Date</string>
+    <string name="alias_hint">Alias</string>
+    <string name="scene_hint">Scene</string>
+    <string name="bio_hint">Bio</string>
+    <string name="desc_hint">Description</string>
+    <string name="location_hint">Location</string>
 </resources>

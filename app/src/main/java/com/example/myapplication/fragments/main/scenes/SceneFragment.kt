@@ -76,18 +76,18 @@ class SceneFragment : Fragment(), ScenesAdapter.RawClickListener {
 
     override fun deleteScene(scene: Scene) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Yes"){_, _->
+        builder.setPositiveButton(R.string.delete_yes){_, _->
             viewModel.deleteScene(scene)
             Toast.makeText(
                 requireContext(),
-                "${scene.scene_name} successfully deleted!",
+                "${scene.scene_name} " + getString(R.string.delete_success),
                 Toast.LENGTH_SHORT).show()
         }
-        builder.setNegativeButton("No"){_, _->
+        builder.setNegativeButton(R.string.delete_no){_, _->
 
         }
-        builder.setTitle("Delete ${scene.scene_name}?")
-        builder.setMessage("Do you want to delete ${scene.scene_name}?")
+        builder.setTitle(getString(R.string.delete_confirm) + " ${scene.scene_name}?")
+        builder.setMessage(getString(R.string.delete_desc) + " ${scene.scene_name}?")
         builder.create().show()
     }
 

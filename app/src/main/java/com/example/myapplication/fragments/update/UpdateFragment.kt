@@ -103,15 +103,15 @@ class UpdateFragment : Fragment() {
             val updatedProject = Projects(args.currentProject.id, projectName,authorName,date)
             //Update current project
             viewModel.updateProject(updatedProject)
-            Toast.makeText(requireContext(), "Successfully updated!", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), R.string.update_success, Toast.LENGTH_LONG).show()
             //Navigate back
 //            val action = UpdateFragmentDirections.actionUpdateFragmentToProjectDetailsFragment(args.currentProject)
 //            findNavController().navigate(action)
-            //Navigation.findNavController(requireView()).navigateUp()
+            Navigation.findNavController(requireView()).navigateUp()
         }
         else
         {
-            Toast.makeText(requireContext(), "Please fill out all fields!", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), R.string.set_fields, Toast.LENGTH_LONG).show()
         }
     }
 

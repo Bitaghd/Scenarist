@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.example.myapplication.R
 import com.example.myapplication.viewmodel.DataViewModel
 import com.example.myapplication.model.Projects
 import com.example.myapplication.databinding.FragmentAddProjectBinding
@@ -43,13 +44,13 @@ class AddProjectFragment : Fragment() {
             val project = Projects(0,projectName,authorName,Integer.parseInt(date.toString()))
             //Add data to database
             mDataViewModel.addProjects(project)
-            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), R.string.add_success, Toast.LENGTH_LONG).show()
             //Navigate back
             //findNavController().navigate(R.id.action_addProjectFragment_to_mainFragment)
             Navigation.findNavController(requireView()).navigateUp()
         }
         else{
-            Toast.makeText(requireContext(), "Please fill out all fields!", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), R.string.set_fields, Toast.LENGTH_LONG).show()
         }
     }
 

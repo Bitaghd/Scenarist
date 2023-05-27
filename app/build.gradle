@@ -14,6 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.myapplication"
+        resConfigs "en","ru"
         minSdk 26
         targetSdk 33
         versionCode 1
@@ -58,6 +59,7 @@ dependencies {
 
     //Room
     implementation 'androidx.room:room-runtime:2.5.1'
+    implementation 'androidx.preference:preference:1.2.0'
     kapt 'androidx.room:room-compiler:2.5.1'
     implementation 'androidx.room:room-ktx:2.5.1'
     androidTestImplementation 'androidx.room:room-testing:2.5.1'

@@ -22,8 +22,8 @@ class MainAdapter(val listener: RawClickListener):RecyclerView.Adapter<MainAdapt
         val currentItem = projectsList[position]
         holder.binding.projectNameTxt.text = currentItem.pr_name
         holder.binding.rawLayout.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToSupportFragment(currentItem)
-            holder.itemView.findNavController().navigate(action)
+            val action = MainFragmentDirections.actionMainFragmentToProjectDetailsFragment(currentItem)
+           holder.itemView.findNavController().navigate(action)
         }
         holder.binding.deleteProjectID.setOnClickListener{
             listener.deleteProject(currentItem)
@@ -31,19 +31,19 @@ class MainAdapter(val listener: RawClickListener):RecyclerView.Adapter<MainAdapt
 
     }
 
-    private fun setListeners(currentItem: Projects, holder: MainAdapter.MyViewHolder) {
-        holder.binding.rawLayout.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToSupportFragment(currentItem)
-//            val intent = Intent(holder.itemView.context, SupportFragment::class.java)
-//            intent.putExtra("id", currentItem.id)
-            holder.itemView.findNavController().navigate(action)
-            //val action = MainFragmentDirections.actionMainFragmentToSupportFragment(intent)
-            //holder.itemView.findNavController().navigate(action)
-        }
-        holder.binding.deleteProjectID.setOnClickListener{
-            listener.deleteProject(currentItem)
-        }
-    }
+//    private fun setListeners(currentItem: Projects, holder: MainAdapter.MyViewHolder) {
+//        holder.binding.rawLayout.setOnClickListener {
+//            //val action = MainFragmentDirections.actionMainFragmentToSupportFragment(currentItem)
+////            val intent = Intent(holder.itemView.context, SupportFragment::class.java)
+////            intent.putExtra("id", currentItem.id)
+//            //holder.itemView.findNavController().navigate(action)
+//            //val action = MainFragmentDirections.actionMainFragmentToSupportFragment(intent)
+//            //holder.itemView.findNavController().navigate(action)
+//        }
+//        holder.binding.deleteProjectID.setOnClickListener{
+//            listener.deleteProject(currentItem)
+//        }
+//    }
 
     fun setData(projects: List<Projects>){
         this.projectsList = projects

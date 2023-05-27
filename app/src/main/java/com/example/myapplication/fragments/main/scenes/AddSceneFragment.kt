@@ -73,11 +73,11 @@ class AddSceneFragment : Fragment() {
         if(inputCheck(sceneName,sceneLocation,desc)){
             val currScene = Scene(0, sceneName, sceneLocation, desc, projectID)
             viewModel.addScene(currScene)
-            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), R.string.add_success, Toast.LENGTH_LONG).show()
             Navigation.findNavController(requireView()).navigateUp()
         }
         else
-            Toast.makeText(requireContext(), "Please fill out all fields!", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), R.string.set_fields, Toast.LENGTH_LONG).show()
     }
 
     private fun inputCheck(sceneName: String, sceneLocation: String, desc: String): Boolean {

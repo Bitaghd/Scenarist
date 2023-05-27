@@ -5,54 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="12dp"
-    tools:context=".fragments.main.locations.LocationUpdate">
+    tools:context=".fragments.main.characters.AddCharacterFragment">
 
 
     <TextView
-        android:id="@+id/updateLocationNameText"
+        android:id="@+id/characterNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:textSize="20sp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="24dp"
         android:text="@string/name"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/updateLocationSceneText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:textSize="20sp"
-        android:layout_marginTop="52dp"
-        android:text="@string/scene"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateLocationNameText" />
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/updateLocationNameLayout"
+        android:id="@+id/characterNameLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/updateLocationName"
+            android:id="@+id/characterNameField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/name_hint"
             android:inputType="textShortMessage" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/characterAliesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/alias"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/characterNameText" />
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/characterAliasLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/updateLocationSceneLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
@@ -60,18 +61,49 @@
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateLocationNameLayout">
+        app:layout_constraintTop_toBottomOf="@+id/characterNameLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/updateLocationScene"
+            android:id="@+id/characterAliasField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textShortMessage"
-            android:hint="@string/scene_hint" />
+            android:hint="@string/alias_hint"
+            android:inputType="textShortMessage" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/characterSceneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/scene"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/characterAliesText" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/characterSceneLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/characterAliasLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/characterSceneField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/scene_hint"
+            android:inputType="textShortMessage" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/updateLocationDescriptionLayout"
+        android:id="@+id/characterBioLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -79,38 +111,39 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.56">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/updateLocationDescription"
+            android:id="@+id/characterBioField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top"
-            android:hint="@string/desc_hint"
-            android:inputType="textMultiLine|textCapCharacters"
-            android:lines="10"
-            android:textSize="16sp" />
+            android:hint="@string/bio_hint"
+            android:inputType="textMultiLine|textCapSentences"
+            android:lines="10" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/updateLocationImageText"
+        android:id="@+id/characterProfPicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="@string/image"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateLocationDescriptionLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/characterBioLayout" />
 
     <ImageView
-        android:id="@+id/updateLocationImage"
+        android:id="@+id/characterProfilePic"
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateLocationImageText"
+        app:layout_constraintTop_toBottomOf="@+id/characterProfPicText"
         tools:src="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

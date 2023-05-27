@@ -26,7 +26,7 @@ import com.example.myapplication.viewmodel.DataViewModel
 
 
 class SupportFragment : Fragment() {
-    private val arg by navArgs<SupportFragmentArgs>()
+    //private val arg by navArgs<SupportFragmentArgs>()
     private var _binding: FragmentSupportBinding? = null
     lateinit var viewModel : DataViewModel
     private val binding get() = _binding!!
@@ -44,10 +44,10 @@ class SupportFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val navHostFragment = childFragmentManager.findFragmentById(R.id.support) as NavHostFragment
         val navController = navHostFragment.findNavController()
-        binding.bottomNav.setupWithNavController(navController)
+//        binding.bottomNav.setupWithNavController(navController)
 
         //Setting the current item value
-        viewModel.setCurrentItem(arg.currentProject)
+       // viewModel.setCurrentItem(arg.currentProject)
 
 //        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
 //            Navigation.findNavController(requireView()).navigateUp()

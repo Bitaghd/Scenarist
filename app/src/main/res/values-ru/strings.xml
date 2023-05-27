@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Scenarist</string>
+    <string name="user_profile">Profile</string>
+    <string name="main_screen">Главная</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Настройки</string>
+    <string name="sync_header">Sync</string>
+    <string name="settings">Настройки</string>
+    <!-- Messages Preferences -->
+    <string name="signature_title">Язык</string>
+    <string name="reply_title">Язык</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+
+    <!--    Image related-->
+    <string name="perms_denied">Отказано в правах</string>
+
+    <!--    Update related-->
+    <string name="set_fields">Пожалуйста заполните все поля!</string>
+    <string name="update_success">Успешно обновлено!</string>
+
+    <!--    Adding related-->
+    <string name="add_success">Успешно добавлено!</string>
+
+    <!--    Deletion related-->
+    <string name="delete_success">успешно удалено!</string>
+    <string name="delete_yes">Удалить</string>
+    <string name="delete_no">Отмена</string>
+    <string name="delete_confirm">Удалить</string>
+    <string name="delete_desc">Вы действительно хотите удалить</string>
+
+    <!--    Drawable details related-->
+    <string name="name">Название:</string>
+    <string name="author">Автор:</string>
+    <string name="date">Дата:</string>
+    <string name="scene">Сцена:</string>
+    <string name="location">Локация:</string>
+    <string name="alias">Псевдоним:</string>
+    <string name="image">Изображение:</string>
+    <string name="timing">Хронометраж:</string>
+
+    <!--    Headers-->
+    <string name="project_header">Проект</string>
+    <string name="genres_header">Жанры</string>
+    <string name="characters_header">Персонажи</string>
+    <string name="locations_header">Докации</string>
+    <string name="scene_header">Сцены</string>
+
+    <!--    Hints-->
+    <string name="name_hint">Название</string>
+    <string name="author_hint">Автор</string>
+    <string name="date_hint">Дата</string>
+    <string name="alias_hint">Псевдоним</string>
+    <string name="scene_hint">Сцена</string>
+    <string name="bio_hint">Биография</string>
+    <string name="desc_hint">Описание</string>
+    <string name="location_hint">Локация</string>
+</resources>

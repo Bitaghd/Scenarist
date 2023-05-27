@@ -1,6 +1,8 @@
-package com.example.myapplication.fragments.main.locations
+package com.example.myapplication.fragments.main.characters
 
+import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -14,60 +16,60 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.content.PermissionChecker.checkSelfPermission
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-
-import android.Manifest
-import android.content.Context
-import android.content.Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
-import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentLocationUpdateBinding
+import com.example.myapplication.databinding.FragmentUpdateCharacterBinding
+import com.example.myapplication.fragments.main.locations.LocationUpdateArgs
+import com.example.myapplication.model.Characters
 import com.example.myapplication.model.Location
 import com.example.myapplication.viewmodel.DataViewModel
 
 
-class LocationUpdate : Fragment() {
+class UpdateCharacter : Fragment() {
     private lateinit var viewModel: DataViewModel
     private var imageUri: Uri? = null
-    private val args by navArgs<LocationUpdateArgs>()
-    private var _binding: FragmentLocationUpdateBinding? = null
+    private val args by navArgs<UpdateCharacterArgs>()
+    private var _binding: FragmentUpdateCharacterBinding? = null
     private val binding get() = _binding!!
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        viewModel = ViewModelProvider(requireActivity()).get(DataViewModel::class.java)
-        _binding = FragmentLocationUpdateBinding.inflate(inflater, container, false)
 
-        setDataBeforeUpdate(args.currentLocation)
+        viewModel = ViewModelProvider(requireActivity()).get(DataViewModel::class.java)
+        _binding = FragmentUpdateCharacterBinding.inflate(inflater, container, false)
+
+        setDataBeforeUpdate(args.currentChar)
+
         return binding.root
     }
 
-    private fun setDataBeforeUpdate(currentLocation: Location) {
-        binding.updateLocationName.setText(currentLocation.location_name)
-        binding.updateLocationScene.setText(currentLocation.location_scene)
-        binding.updateLocationDescription.setText(currentLocation.desc)
-        binding.updateLocationImage.setImageURI(currentLocation.image)
-        imageUri = currentLocation.image
+    private fun setDataBeforeUpdate(currentChar: Characters) {
+        binding.updCharacterNameField.setText(currentChar.char_name)
+        binding.updCharacterAliasField.setText(currentChar.char_alias)
+        binding.updCharacterSceneField.setText(currentChar.char_scene)
+        binding.updCharacterBioField.setText(currentChar.bio)
+        binding.updCharacterProfilePic.setImageURI(currentChar.profile_image)
+        imageUri = currentChar.profile_image
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.updateLocationImage.setOnClickListener {
+        binding.updCharacterProfilePic.setOnClickListener {
             //binding.updateLocationImage.setImageDrawable(null)
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
 
@@ -95,22 +97,52 @@ class LocationUpdate : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 if (menuItem.itemId == R.id.save_menu){
-                    updateLocation()
+                    updateCharacter()
                 }
                 return true
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
+    private fun updateCharacter() {
+        val characterName = binding.updCharacterNameField.text.toString()
+        val characterAlias = binding.updCharacterAliasField.text.toString()
+        val characterScene = binding.updCharacterSceneField.text.toString()
+        val bio = binding.updCharacterBioField.text.toString()
+        val image = imageUri
+        //val imageView: ImageView = binding.updateLocationImage
+//        val image = BitmapFactory.decodeResource(resources,R.id.locationImage)
+        //Log.d("Bitmap:", "${image.width} , ${image.height}, ${image.config}")
+        if(inputCheck(characterName,characterAlias,characterScene,bio, image)){
+            //val image : Bitmap = imageView.drawable.toBitmap()
+            val currCharacter = Characters(args.currentChar.char_id, characterName,characterAlias,
+                characterScene, bio, args.currentChar.projectID, image)
+            //val currScene = Scene(0, sceneName, sceneLocation, desc, projectID)
+            viewModel.updateCharacter(currCharacter)
+            Toast.makeText(requireContext(), R.string.update_success, Toast.LENGTH_LONG).show()
+            Navigation.findNavController(requireView()).navigateUp()
+        }
+        else
+            Toast.makeText(requireContext(), R.string.set_fields, Toast.LENGTH_LONG).show()
+    }
+
+    private fun inputCheck(characterName: String, characterAlias: String, characterScene: String, bio: String, image: Uri?): Boolean {
+        return !(TextUtils.isEmpty(characterName) || TextUtils.isEmpty(characterAlias) || TextUtils.isEmpty(characterScene)
+                || Uri.EMPTY.equals(image) || image ==null || TextUtils.isEmpty(bio)
+                )
+
+    }
+
     private fun chooseImageGallery() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-        intent.addFlags(FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
-        intent.addFlags(FLAG_GRANT_READ_URI_PERMISSION)
+        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
         intent.type = "image/*"
         startForResult.launch(intent)
     }
+
 
     private val startForResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -124,7 +156,7 @@ class LocationUpdate : Fragment() {
 //            imageUri = data?.data
 //            val source = ImageDecoder.createSource(requireActivity().contentResolver,data)
             //binding.locationImage.setImageBitmap(data?.data)
-            binding.updateLocationImage.setImageURI(imageUri)
+            binding.updCharacterProfilePic.setImageURI(imageUri)
         }
 
     }
@@ -144,32 +176,6 @@ class LocationUpdate : Fragment() {
             chooseImageGallery()
         else
             Toast.makeText(requireContext(),R.string.perms_denied, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun updateLocation() {
-        val locationName = binding.updateLocationName.text.toString()
-        val locationScene = binding.updateLocationScene.text.toString()
-        val desc = binding.updateLocationDescription.text.toString()
-        val image = imageUri
-        //val imageView: ImageView = binding.updateLocationImage
-//        val image = BitmapFactory.decodeResource(resources,R.id.locationImage)
-        //Log.d("Bitmap:", "${image.width} , ${image.height}, ${image.config}")
-        if(inputCheck(locationName,locationScene,desc, image)){
-            //val image : Bitmap = imageView.drawable.toBitmap()
-            val currLocation = Location(args.currentLocation.location_id, locationName,locationScene,args.currentLocation.projectID, image, desc)
-            //val currScene = Scene(0, sceneName, sceneLocation, desc, projectID)
-            viewModel.updateLocation(currLocation)
-            Toast.makeText(requireContext(), R.string.update_success, Toast.LENGTH_LONG).show()
-            Navigation.findNavController(requireView()).navigateUp()
-        }
-        else
-            Toast.makeText(requireContext(), R.string.set_fields, Toast.LENGTH_LONG).show()
-    }
-
-    private fun inputCheck(sceneName: String, sceneLocation: String, desc: String, image: Uri?): Boolean {
-        return !(TextUtils.isEmpty(sceneName) || TextUtils.isEmpty(sceneLocation) || TextUtils.isEmpty(desc)
-                || Uri.EMPTY.equals(image) || image ==null
-                )
     }
 
     override fun onDestroyView() {

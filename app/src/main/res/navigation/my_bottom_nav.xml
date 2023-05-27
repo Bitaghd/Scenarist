@@ -75,6 +75,12 @@
         <action
             android:id="@+id/action_characterFragment_to_projectDetailsFragment"
             app:destination="@id/projectDetailsFragment" />
+        <action
+            android:id="@+id/action_characterFragment_to_addCharacterFragment"
+            app:destination="@id/addCharacterFragment" />
+        <action
+            android:id="@+id/action_characterFragment_to_characterDetails"
+            app:destination="@id/characterDetails" />
     </fragment>
     <fragment
         android:id="@+id/addSceneFragment"
@@ -144,5 +150,44 @@
         <action
             android:id="@+id/action_locationUpdate_to_locationDetails"
             app:destination="@id/locationDetails" />
+        <argument
+            android:name="currentLocation"
+            app:argType="com.example.myapplication.model.Location" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCharacterFragment"
+        android:name="com.example.myapplication.fragments.main.characters.AddCharacterFragment"
+        android:label="fragment_add_character"
+        tools:layout="@layout/fragment_add_character" >
+        <action
+            android:id="@+id/action_addCharacterFragment_to_characterFragment"
+            app:destination="@id/characterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetails"
+        android:name="com.example.myapplication.fragments.main.characters.CharacterDetails"
+        android:label="fragment_character_details"
+        tools:layout="@layout/fragment_character_details" >
+        <action
+            android:id="@+id/action_characterDetails_to_characterFragment"
+            app:destination="@id/characterFragment" />
+        <action
+            android:id="@+id/action_characterDetails_to_updateCharacter"
+            app:destination="@id/updateCharacter" />
+        <argument
+            android:name="currentChar"
+            app:argType="com.example.myapplication.model.Characters" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateCharacter"
+        android:name="com.example.myapplication.fragments.main.characters.UpdateCharacter"
+        android:label="fragment_update_character"
+        tools:layout="@layout/fragment_update_character" >
+        <action
+            android:id="@+id/action_updateCharacter_to_characterDetails"
+            app:destination="@id/characterDetails" />
+        <argument
+            android:name="currentChar"
+            app:argType="com.example.myapplication.model.Characters" />
     </fragment>
 </navigation>

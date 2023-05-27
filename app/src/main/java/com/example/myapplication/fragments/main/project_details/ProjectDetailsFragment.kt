@@ -12,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentProjectDetailsBinding
 import com.example.myapplication.model.Projects
@@ -21,8 +22,9 @@ import java.lang.Exception
 
 class ProjectDetailsFragment : Fragment() {
     lateinit var viewModel: DataViewModel
+    private val args by navArgs<ProjectDetailsFragmentArgs>()
     private var _binding: FragmentProjectDetailsBinding? = null
-    private lateinit var currentProject: Projects
+//    private lateinit var currentProject: Projects
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,13 +47,14 @@ class ProjectDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setTextsFromDatabase(args.currentProject)
 
-        val setDataObserver = Observer<Projects>{project->
-            setTextsFromDatabase(project)
-            currentProject = project
-        }
-        //Observing currentProject
-        viewModel.currentProject.observe(viewLifecycleOwner, setDataObserver)
+//        val setDataObserver = Observer<Projects>{project->
+//            setTextsFromDatabase(project)
+//            currentProject = project
+//        }
+//        //Observing currentProject
+//        viewModel.currentProject.observe(viewLifecycleOwner, setDataObserver)
         val menuHost : MenuHost = requireActivity()
         menuHost.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -61,7 +64,7 @@ class ProjectDetailsFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 if (menuItem.itemId == R.id.edit_menu){
                     val action =
-                        ProjectDetailsFragmentDirections.actionProjectDetailsFragmentToUpdateFragment(currentProject)
+                        ProjectDetailsFragmentDirections.actionProjectDetailsFragmentToUpdateFragment(args.currentProject)
                     findNavController().navigate(action)
                 }
                 return true

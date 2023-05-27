@@ -24,7 +24,6 @@ class LocationFragment : Fragment(), LocationsAdapter.RawClickListener {
     lateinit var viewModel: DataViewModel
     private val adapter = LocationsAdapter(this@LocationFragment)
     private var _binding: FragmentLocationBinding? = null
-    private lateinit var currentProject: Projects
     private var projectID: Int = 0
     private val binding get() = _binding!!
 
@@ -73,18 +72,18 @@ class LocationFragment : Fragment(), LocationsAdapter.RawClickListener {
 
     override fun deleteLocation(location: Location) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Yes"){_, _->
+        builder.setPositiveButton(R.string.delete_yes){_, _->
             viewModel.deleteLocation(location)
             Toast.makeText(
                 requireContext(),
-                "${location.location_name} successfully deleted!",
+                "${location.location_name} " + getString(R.string.delete_success),
                 Toast.LENGTH_SHORT).show()
         }
-        builder.setNegativeButton("No"){_, _->
+        builder.setNegativeButton(R.string.delete_no){_, _->
 
         }
-        builder.setTitle("Delete ${location.location_name}?")
-        builder.setMessage("Do you want to delete ${location.location_name}?")
+        builder.setTitle(getString(R.string.delete_confirm) + " ${location.location_name}?")
+        builder.setMessage(getString(R.string.delete_desc) + " ${location.location_name}?")
         builder.create().show()
     }
     }

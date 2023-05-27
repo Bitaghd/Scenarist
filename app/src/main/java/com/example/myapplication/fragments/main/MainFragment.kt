@@ -18,6 +18,7 @@ import com.example.myapplication.R
 import com.example.myapplication.viewmodel.DataViewModel
 import com.example.myapplication.databinding.FragmentMainBinding
 import com.example.myapplication.model.Projects
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainFragment : Fragment(), MainAdapter.RawClickListener {
@@ -30,8 +31,8 @@ class MainFragment : Fragment(), MainAdapter.RawClickListener {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-
-
+        val navbar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_nav2)
+        navbar.visibility = View.GONE
         //Recycler View
         val adapter = MainAdapter(this@MainFragment)
         val recyclerView = binding.recyclerview
@@ -58,12 +59,14 @@ class MainFragment : Fragment(), MainAdapter.RawClickListener {
 
         menuHost.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.delete_menu, menu)
+                menuInflater.inflate(R.menu.settings_menu, menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                if (menuItem.itemId == R.id.delete_menu){
-                    deleteAllProjects()
+                if (menuItem.itemId == R.id.settings_menu){
+                    val action = MainFragmentDirections.actionMainFragmentToSettingsFragment()
+                    findNavController().navigate(action)
+                    //deleteAllProjects()
                 }
                 return true
             }
@@ -94,19 +97,19 @@ class MainFragment : Fragment(), MainAdapter.RawClickListener {
 
     override fun deleteProject(projects: Projects) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Yes"){_, _->
+        builder.setPositiveButton(R.string.delete_yes){_, _->
             mProjectViewModel.deleteProject(projects)
             Toast.makeText(
                 requireContext(),
-                "${projects.pr_name} successfully deleted!",
+                "${projects.pr_name} " + getString(R.string.delete_success),
                 Toast.LENGTH_SHORT).show()
             Navigation.findNavController(requireView()).navigateUp()
         }
-        builder.setNegativeButton("No"){_, _->
+        builder.setNegativeButton(R.string.delete_no){_, _->
 
         }
-        builder.setTitle("Delete ${projects.pr_name}?")
-        builder.setMessage("Do you want to delete ${projects.pr_name}?")
+        builder.setTitle(getString(R.string.delete_confirm) + " ${projects.pr_name}?")
+        builder.setMessage(getString(R.string.delete_desc) + " ${projects.pr_name}?")
         builder.create().show()
     }
 }

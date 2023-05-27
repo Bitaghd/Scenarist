@@ -2,6 +2,7 @@ package com.example.myapplication.repository
 
 import androidx.lifecycle.LiveData
 import com.example.myapplication.data.ProjectsDao
+import com.example.myapplication.model.Characters
 import com.example.myapplication.model.Location
 import com.example.myapplication.model.Projects
 import com.example.myapplication.model.Scene
@@ -76,6 +77,23 @@ class ProjectsRepository(private val projectsDao: ProjectsDao) {
     suspend fun deleteAllLocations(){
         projectsDao.deleteAllLocations()
     }
+
+    suspend fun addCharacter(characters: Characters){
+        projectsDao.addCharacter(characters)
+    }
+
+    suspend fun deleteCharacter(characters: Characters){
+        projectsDao.deleteCharacter(characters)
+    }
+
+    suspend fun updateCharacter(characters: Characters){
+        projectsDao.updateCharacter(characters)
+    }
+
+    fun getAllCharacters(projectID: Int): LiveData<List<Characters>> {
+        return projectsDao.getAllCharacters(projectID)
+    }
+
 
 
 }

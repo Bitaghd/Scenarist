@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.ProjectsDatabase
+import com.example.myapplication.model.Characters
 import com.example.myapplication.model.Location
 import com.example.myapplication.repository.ProjectsRepository
 import com.example.myapplication.model.Projects
@@ -104,6 +105,27 @@ class DataViewModel(application:Application): AndroidViewModel(application) {
 
     fun getLocationsInProject(projectID: Int): LiveData<List<Location>> {
         return repository.getAllLocations(projectID)
+    }
+
+    fun addCharacter(characters: Characters){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addCharacter(characters)
+        }
+    }
+    fun deleteCharacter(characters: Characters){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteCharacter(characters)
+        }
+    }
+
+    fun updateCharacter(characters: Characters){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateCharacter(characters)
+        }
+    }
+
+    fun getCharactersInProject(projectID: Int): LiveData<List<Characters>> {
+        return repository.getAllCharacters(projectID)
     }
 
 

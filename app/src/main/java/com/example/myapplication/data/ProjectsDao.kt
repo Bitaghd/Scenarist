@@ -2,10 +2,10 @@ package com.example.myapplication.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.myapplication.model.Characters
 import com.example.myapplication.model.Location
 import com.example.myapplication.model.Projects
 import com.example.myapplication.model.Scene
-import com.example.myapplication.model.relations.ProjectWithScenes
 
 @Dao
 interface ProjectsDao {
@@ -61,4 +61,17 @@ interface ProjectsDao {
 
     @Query("SELECT * FROM location WHERE projectID = :projectID")
     fun getAllLocations(projectID: Int): LiveData<List<Location>>
+
+    //Character
+    @Insert
+    suspend fun addCharacter(characters: Characters)
+
+    @Delete
+    suspend fun deleteCharacter(characters: Characters)
+
+    @Update
+    suspend fun updateCharacter(characters: Characters)
+
+    @Query("SELECT * FROM character WHERE projectID = :projectID")
+    fun getAllCharacters(projectID: Int): LiveData<List<Characters>>
 }
