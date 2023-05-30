@@ -38,10 +38,10 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener{_, destination, _ ->
             if(destination.id == R.id.activity_main || destination.id == R.id.main_fragment) {
 
-                binding.bottomNav2.visibility = View.GONE
+                binding.bottomNav.visibility = View.GONE
             } else {
 
-                binding.bottomNav2.visibility = View.VISIBLE
+                binding.bottomNav.visibility = View.VISIBLE
             }
 
         }

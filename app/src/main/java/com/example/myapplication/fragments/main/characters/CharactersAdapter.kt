@@ -36,6 +36,7 @@ class CharactersAdapter(val listener: RawClickListener):RecyclerView.Adapter<Cha
 
         holder.binding.characterRawLayout.setOnClickListener{
             val action = CharacterFragmentDirections.actionCharacterFragmentToCharacterDetails(currentChar)
+            //val action = CharacterFragmentDirections.actionCharacterFragmentToCharacterDetails(currentChar)
             holder.itemView.findNavController().navigate(action)
         }
 

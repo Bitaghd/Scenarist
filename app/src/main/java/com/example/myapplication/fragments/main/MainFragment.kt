@@ -31,7 +31,7 @@ class MainFragment : Fragment(), MainAdapter.RawClickListener {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        val navbar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_nav2)
+        val navbar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_nav)
         navbar.visibility = View.GONE
         //Recycler View
         val adapter = MainAdapter(this@MainFragment)

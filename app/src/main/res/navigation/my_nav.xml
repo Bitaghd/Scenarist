@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_projectDetailsFragment_to_characterFragment"
             app:destination="@id/characterFragment" />
+        <action
+            android:id="@+id/action_projectDetailsFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
     </fragment>
     <fragment
         android:id="@+id/sceneFragment"
@@ -65,18 +68,18 @@
             app:destination="@id/projectDetailsFragment" />
         <action
             android:id="@+id/action_sceneFragment_to_addSceneFragment"
-            app:destination="@id/addSceneFragment2" />
+            app:destination="@id/addSceneFragment" />
         <action
             android:id="@+id/action_sceneFragment_to_sceneDetails"
             app:destination="@id/sceneDetails" />
     </fragment>
     <fragment
-        android:id="@+id/addSceneFragment2"
+        android:id="@+id/addSceneFragment"
         android:name="com.example.myapplication.fragments.main.scenes.AddSceneFragment"
         android:label="fragment_add_scene"
         tools:layout="@layout/fragment_add_scene" >
         <action
-            android:id="@+id/action_addSceneFragment2_to_sceneFragment"
+            android:id="@+id/action_addSceneFragment_to_sceneFragment"
             app:destination="@id/sceneFragment" />
     </fragment>
     <fragment
@@ -85,13 +88,13 @@
         android:label="fragment_scene_details"
         tools:layout="@layout/fragment_scene_details" >
         <action
-            android:id="@+id/action_sceneDetails_to_sceneFragment2"
+            android:id="@+id/action_sceneDetails_to_sceneFragment"
             app:destination="@id/sceneFragment" />
         <argument
             android:name="currentScene"
             app:argType="com.example.myapplication.model.Scene" />
         <action
-            android:id="@+id/action_sceneDetails_to_sceneUpdate2"
+            android:id="@+id/action_sceneDetails_to_sceneUpdate"
             app:destination="@id/sceneUpdate" />
     </fragment>
     <fragment
@@ -100,7 +103,7 @@
         android:label="fragment_scene_update"
         tools:layout="@layout/fragment_scene_update" >
         <action
-            android:id="@+id/action_sceneUpdate_to_sceneDetails2"
+            android:id="@+id/action_sceneUpdate_to_sceneDetails"
             app:destination="@id/sceneDetails" />
         <argument
             android:name="currentScene"
@@ -112,13 +115,13 @@
         android:label="fragment_location"
         tools:layout="@layout/fragment_location" >
         <action
-            android:id="@+id/action_locationFragment_to_projectDetailsFragment2"
+            android:id="@+id/action_locationFragment_to_projectDetailsFragment"
             app:destination="@id/projectDetailsFragment" />
         <action
-            android:id="@+id/action_locationFragment_to_locationDetails3"
+            android:id="@+id/action_locationFragment_to_locationDetails"
             app:destination="@id/locationDetails" />
         <action
-            android:id="@+id/action_locationFragment_to_addLocationFragment3"
+            android:id="@+id/action_locationFragment_to_addLocationFragment"
             app:destination="@id/addLocationFragment" />
     </fragment>
     <fragment
@@ -127,13 +130,13 @@
         android:label="fragment_location_details"
         tools:layout="@layout/fragment_location_details" >
         <action
-            android:id="@+id/action_locationDetails_to_locationFragment2"
+            android:id="@+id/action_locationDetails_to_locationFragment"
             app:destination="@id/locationFragment" />
         <argument
             android:name="currentLocation"
             app:argType="com.example.myapplication.model.Location" />
         <action
-            android:id="@+id/action_locationDetails_to_locationUpdate2"
+            android:id="@+id/action_locationDetails_to_locationUpdate"
             app:destination="@id/locationUpdate" />
     </fragment>
     <fragment
@@ -147,7 +150,7 @@
         android:label="fragment_location_update"
         tools:layout="@layout/fragment_location_update" >
         <action
-            android:id="@+id/action_locationUpdate_to_locationDetails2"
+            android:id="@+id/action_locationUpdate_to_locationDetails"
             app:destination="@id/locationDetails" />
         <argument
             android:name="currentLocation"
@@ -159,14 +162,14 @@
         android:label="fragment_character"
         tools:layout="@layout/fragment_character" >
         <action
-            android:id="@+id/action_characterFragment_to_projectDetailsFragment2"
+            android:id="@+id/action_characterFragment_to_projectDetailsFragment"
             app:destination="@id/projectDetailsFragment" />
         <action
-            android:id="@+id/action_characterFragment_to_addCharacterFragment2"
+            android:id="@+id/action_characterFragment_to_addCharacterFragment"
             app:destination="@id/addCharacterFragment" />
         <action
-            android:id="@+id/action_characterFragment_to_characterDetails2"
-            app:destination="@id/characterDetails2" />
+            android:id="@+id/action_characterFragment_to_characterDetails"
+            app:destination="@id/characterDetails" />
     </fragment>
     <fragment
         android:id="@+id/addCharacterFragment"
@@ -178,30 +181,42 @@
             app:destination="@id/characterFragment" />
     </fragment>
     <fragment
-        android:id="@+id/characterDetails2"
+        android:id="@+id/characterDetails"
         android:name="com.example.myapplication.fragments.main.characters.CharacterDetails"
         android:label="fragment_character_details"
         tools:layout="@layout/fragment_character_details" >
         <action
-            android:id="@+id/action_characterDetails2_to_characterFragment"
+            android:id="@+id/action_characterDetails_to_characterFragment"
             app:destination="@id/characterFragment" />
         <argument
             android:name="currentChar"
             app:argType="com.example.myapplication.model.Characters" />
         <action
-            android:id="@+id/action_characterDetails2_to_updateCharacter2"
-            app:destination="@id/updateCharacter2" />
+            android:id="@+id/action_characterDetails_to_updateCharacter"
+            app:destination="@id/updateCharacter" />
     </fragment>
     <fragment
-        android:id="@+id/updateCharacter2"
+        android:id="@+id/updateCharacter"
         android:name="com.example.myapplication.fragments.main.characters.UpdateCharacter"
         android:label="fragment_update_character"
         tools:layout="@layout/fragment_update_character" >
         <action
-            android:id="@+id/action_updateCharacter2_to_characterDetails2"
-            app:destination="@id/characterDetails2" />
+            android:id="@+id/action_updateCharacter_to_characterDetails"
+            app:destination="@id/characterDetails" />
         <argument
             android:name="currentChar"
             app:argType="com.example.myapplication.model.Characters" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.myapplication.fragments.update.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_projectDetailsFragment2"
+            app:destination="@id/projectDetailsFragment" />
+        <argument
+            android:name="currentProject"
+            app:argType="com.example.myapplication.model.Projects" />
     </fragment>
 </navigation>
