@@ -6,16 +6,18 @@ import androidx.room.migration.AutoMigrationSpec
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.myapplication.model.Characters
+import com.example.myapplication.model.Details
 import com.example.myapplication.model.Location
 import com.example.myapplication.model.Projects
 import com.example.myapplication.model.Scene
 
 @Database(
-    entities = [Projects::class, Scene::class, Location::class, Characters::class],
-    version = 6,
+    entities = [Projects::class, Scene::class, Location::class, Characters::class, Details::class],
+    version = 7,
     exportSchema = true,
     autoMigrations =  [
         AutoMigration(from = 3, to = 4),
+        AutoMigration(from = 6, to = 7)
         //AutoMigration(from = 4, to = 5)
         //AutoMigration(from = 4, to = 5, spec = ProjectsDatabase.Companion.AutoMigration4to5Ver2::class)
     ]

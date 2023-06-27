@@ -4,15 +4,15 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.viewmodel.DataViewModel
@@ -31,13 +31,19 @@ class MainFragment : Fragment(), MainAdapter.RawClickListener {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        val navbar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_nav)
+        val navbar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         navbar.visibility = View.GONE
         //Recycler View
         val adapter = MainAdapter(this@MainFragment)
         val recyclerView = binding.recyclerview
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        recyclerView.apply {
+            val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            divider.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider)!!)
+            addItemDecoration(divider)
+        }
 
         // Project view model
         mProjectViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
@@ -55,9 +61,8 @@ class MainFragment : Fragment(), MainAdapter.RawClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val menuHost : MenuHost = requireActivity()
 
-        menuHost.addMenuProvider(object: MenuProvider {
+        binding.include.customTopBarLayout.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.settings_menu, menu)
             }

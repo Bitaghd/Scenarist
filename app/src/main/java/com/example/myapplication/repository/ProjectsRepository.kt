@@ -3,10 +3,10 @@ package com.example.myapplication.repository
 import androidx.lifecycle.LiveData
 import com.example.myapplication.data.ProjectsDao
 import com.example.myapplication.model.Characters
+import com.example.myapplication.model.Details
 import com.example.myapplication.model.Location
 import com.example.myapplication.model.Projects
 import com.example.myapplication.model.Scene
-import com.example.myapplication.model.relations.ProjectWithScenes
 
 class ProjectsRepository(private val projectsDao: ProjectsDao) {
     val readAllProjects : LiveData<List<Projects>> = projectsDao.readAllProjects()
@@ -93,6 +93,22 @@ class ProjectsRepository(private val projectsDao: ProjectsDao) {
     fun getAllCharacters(projectID: Int): LiveData<List<Characters>> {
         return projectsDao.getAllCharacters(projectID)
     }
+
+    //Details
+
+    suspend fun addDetails(details: Details){
+        projectsDao.addDetails(details)
+    }
+    suspend fun deleteDetails(details: Details){
+        projectsDao.deleteDetails(details)
+    }
+    suspend fun updateDetails(details: Details){
+        projectsDao.updateDetails(details)
+    }
+    fun getAllDetails(projectID: Int): LiveData<List<Details>>{
+        return projectsDao.getAllDetails(projectID)
+    }
+
 
 
 

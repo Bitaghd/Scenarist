@@ -1,13 +1,13 @@
 package com.example.myapplication.viewmodel
 
 import android.app.Application
-import android.view.animation.Transformation
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.ProjectsDatabase
 import com.example.myapplication.model.Characters
+import com.example.myapplication.model.Details
 import com.example.myapplication.model.Location
 import com.example.myapplication.repository.ProjectsRepository
 import com.example.myapplication.model.Projects
@@ -49,9 +49,6 @@ class DataViewModel(application:Application): AndroidViewModel(application) {
         }
     }
 
-    fun findProjectById(id: Int):LiveData<Projects>{
-        return repository.findProjectById(id)
-    }
     fun setCurrentItem(projects: Projects) {
         currentProject.value = projects
 //        projectID = projects.id
@@ -60,9 +57,6 @@ class DataViewModel(application:Application): AndroidViewModel(application) {
 
     fun getScenesInProject(projectID: Int): LiveData<List<Scene>> {
             return repository.getProjectWithScenes(projectID)
-    }
-    fun getProjectId(): Int {
-        return currentProject.value!!.id
     }
 
     // SCENES THINGS
@@ -126,6 +120,26 @@ class DataViewModel(application:Application): AndroidViewModel(application) {
 
     fun getCharactersInProject(projectID: Int): LiveData<List<Characters>> {
         return repository.getAllCharacters(projectID)
+    }
+
+    fun addDetails(details: Details){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addDetails(details)
+        }
+    }
+
+    fun deleteDetails(details: Details){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.deleteDetails(details)
+        }
+    }
+    fun updateDetails(details: Details){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.updateDetails(details)
+        }
+    }
+    fun getDetailsInProject(projectID: Int): LiveData<List<Details>> {
+        return repository.getAllDetails(projectID)
     }
 
 

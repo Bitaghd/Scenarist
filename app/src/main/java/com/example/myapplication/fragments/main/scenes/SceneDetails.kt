@@ -2,20 +2,16 @@ package com.example.myapplication.fragments.main.scenes
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.provider.ContactsContract.Data
 import android.text.method.ScrollingMovementMethod
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentSceneBinding
 import com.example.myapplication.databinding.FragmentSceneDetailsBinding
-import com.example.myapplication.fragments.main.project_details.ProjectDetailsFragmentDirections
 import com.example.myapplication.model.Scene
 import com.example.myapplication.viewmodel.DataViewModel
 
@@ -44,9 +40,12 @@ class SceneDetails : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val menuHost : MenuHost = requireActivity()
-        menuHost.addMenuProvider(object: MenuProvider {
+        binding.include7.customTopBarLayout.setNavigationIcon(R.drawable.back)
+        binding.include7.customTopBarLayout.title = getString(R.string.scene_header)
+        binding.include7.customTopBarLayout.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.include7.customTopBarLayout.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.edit_menu, menu)
             }

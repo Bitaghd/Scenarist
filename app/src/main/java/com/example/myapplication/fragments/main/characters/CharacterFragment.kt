@@ -7,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentCharacterBinding
-import com.example.myapplication.fragments.main.locations.LocationFragmentDirections
-import com.example.myapplication.fragments.main.locations.LocationsAdapter
 import com.example.myapplication.model.Characters
 import com.example.myapplication.viewmodel.DataViewModel
 
@@ -38,6 +38,18 @@ class CharacterFragment : Fragment(), CharactersAdapter.RawClickListener {
         rv.adapter = Cadapter
         rv.layoutManager = LinearLayoutManager(requireContext())
 
+        rv.apply {
+            val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            divider.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider)!!)
+            addItemDecoration(divider)
+        }
+
+        binding.include2.customTopBarLayout.title = getString(R.string.characters_header)
+        binding.include2.customTopBarLayout.setNavigationIcon(R.drawable.back)
+
+        binding.include2.customTopBarLayout.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
         viewModel = ViewModelProvider(requireActivity()).get(DataViewModel::class.java)
 
         //Get the id of current project

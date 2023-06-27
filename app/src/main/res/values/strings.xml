@@ -21,24 +21,24 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 
-<!--    Image related-->
+    <!--    Image related-->
     <string name="perms_denied">Permission denied</string>
 
-<!--    Update related-->
+    <!--    Update related-->
     <string name="set_fields">Please fill out all fields!</string>
     <string name="update_success">Successfully updated!</string>
 
-<!--    Adding related-->
+    <!--    Adding related-->
     <string name="add_success">Successfully added!</string>
 
-<!--    Deletion related-->
+    <!--    Deletion related-->
     <string name="delete_success">successfully deleted!</string>
     <string name="delete_yes">Delete</string>
     <string name="delete_no">Cancel</string>
     <string name="delete_confirm">Delete</string>
     <string name="delete_desc">Do you want to delete</string>
 
-<!--    Drawable details related-->
+    <!--    Drawable details related-->
     <string name="name">Name:</string>
     <string name="author">Author:</string>
     <string name="date">Date:</string>
@@ -48,14 +48,14 @@
     <string name="image">Image:</string>
     <string name="timing">Timing:</string>
 
-<!--    Headers-->
+    <!--    Headers-->
     <string name="project_header">Project</string>
     <string name="genres_header">Genres</string>
     <string name="characters_header">Characters</string>
     <string name="locations_header">Locations</string>
     <string name="scene_header">Scenes</string>
 
-<!--    Hints-->
+    <!--    Hints-->
     <string name="name_hint">Name</string>
     <string name="author_hint">Author</string>
     <string name="date_hint">Date</string>
@@ -64,4 +64,12 @@
     <string name="bio_hint">Bio</string>
     <string name="desc_hint">Description</string>
     <string name="location_hint">Location</string>
+    <string name="create_project">Create new project</string>
+    <string name="update_project">Update current project</string>
+    <string name="details_title">Additional materials</string>
+    <string name="added_details_title">Created documents</string>
+    <string name="add_link">Add a link</string>
+    <string name="add_gallery">Add a gallery</string>
+    <string name="add_textfile">Add a text file</string>
+    <string name="links">Links</string>
 </resources>

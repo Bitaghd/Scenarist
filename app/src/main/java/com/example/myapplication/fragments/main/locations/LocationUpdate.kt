@@ -14,13 +14,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.content.PermissionChecker.checkSelfPermission
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +27,7 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
 import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentLocationUpdateBinding
 import com.example.myapplication.model.Location
@@ -85,10 +82,14 @@ class LocationUpdate : Fragment() {
             //chooseImageGallery()
         }
 
+        binding.include13.customTopBarLayout.setNavigationIcon(R.drawable.back)
+        binding.include13.customTopBarLayout.title = getString(R.string.locations_header)
+        binding.include13.customTopBarLayout.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
 
-        val menuHost : MenuHost = requireActivity()
 
-        menuHost.addMenuProvider(object: MenuProvider {
+        binding.include13.customTopBarLayout.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.save_menu, menu)
             }
@@ -132,9 +133,9 @@ class LocationUpdate : Fragment() {
     private fun grantReadPermissionToUri(requireContext: Context, imageUri: Uri?) {
         requireContext.grantUriPermission(
             context?.packageName,imageUri,
-            Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+            FLAG_GRANT_READ_URI_PERMISSION or FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
         if (imageUri != null) {
-            requireContext.contentResolver.takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            requireContext.contentResolver.takePersistableUriPermission(imageUri, FLAG_GRANT_READ_URI_PERMISSION)
         }
     }
     private val requestPermissionLauncher = registerForActivityResult(

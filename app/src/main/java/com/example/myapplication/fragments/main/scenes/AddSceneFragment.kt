@@ -1,13 +1,10 @@
 package com.example.myapplication.fragments.main.scenes
 
 import android.os.Bundle
-import android.provider.ContactsContract.Data
 import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
@@ -15,9 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentAddProjectBinding
 import com.example.myapplication.databinding.FragmentAddSceneBinding
-import com.example.myapplication.fragments.main.project_details.ProjectDetailsFragmentDirections
 import com.example.myapplication.model.Scene
 import com.example.myapplication.viewmodel.DataViewModel
 
@@ -33,19 +28,22 @@ class AddSceneFragment : Fragment() {
     ): View{
         //
         _binding = FragmentAddSceneBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(requireActivity()).get(DataViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity())[DataViewModel::class.java]
         viewModel.currentProject.observe(viewLifecycleOwner, Observer {
             projectID = it.id
         })
-        setHasOptionsMenu(true)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.include8.customTopBarLayout.setNavigationIcon(R.drawable.back)
+        binding.include8.customTopBarLayout.title = getString(R.string.scene_header)
+        binding.include8.customTopBarLayout.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
 
-        val menuHost : MenuHost = requireActivity()
-        menuHost.addMenuProvider(object: MenuProvider {
+        binding.include8.customTopBarLayout.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.save_menu, menu)
             }
@@ -59,12 +57,6 @@ class AddSceneFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
-            Navigation.findNavController(requireView()).navigateUp()
-        }
-    }
 
     private fun insertScenesIntoDB() {
         val sceneName = binding.sceneNameField.text.toString()

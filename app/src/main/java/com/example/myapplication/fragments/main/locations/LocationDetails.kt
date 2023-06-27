@@ -9,19 +9,13 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentLocationDetailsBinding
-import com.example.myapplication.databinding.FragmentSceneDetailsBinding
-import com.example.myapplication.fragments.main.scenes.SceneDetailsArgs
-import com.example.myapplication.fragments.main.scenes.SceneDetailsDirections
 import com.example.myapplication.model.Location
 import com.example.myapplication.viewmodel.DataViewModel
 
@@ -58,8 +52,15 @@ class LocationDetails : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val menuHost : MenuHost = requireActivity()
-        menuHost.addMenuProvider(object: MenuProvider {
+
+        binding.include12.customTopBarLayout.setNavigationIcon(R.drawable.back)
+        binding.include12.customTopBarLayout.title = getString(R.string.locations_header)
+        binding.include12.customTopBarLayout.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
+
+        binding.include12.customTopBarLayout.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.edit_menu, menu)
             }

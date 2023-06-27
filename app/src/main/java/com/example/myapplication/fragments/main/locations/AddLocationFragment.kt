@@ -6,37 +6,27 @@ import android.content.Context
 import android.content.Intent
 import android.content.Intent.EXTRA_LOCAL_ONLY
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.TextUtils
-import android.util.Log
 import android.view.*
 import android.content.Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
 import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentAddLocationBinding
-import com.example.myapplication.databinding.FragmentProjectDetailsBinding
 import com.example.myapplication.model.Location
-import com.example.myapplication.model.Projects
-import com.example.myapplication.model.Scene
 import com.example.myapplication.viewmodel.DataViewModel
 
 class AddLocationFragment : Fragment() {
@@ -100,9 +90,9 @@ class AddLocationFragment : Fragment() {
     private fun grantReadPermissionToUri(requireContext: Context, imageUri: Uri?) {
         requireContext.grantUriPermission(
             context?.packageName,imageUri,
-            Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+            FLAG_GRANT_READ_URI_PERMISSION or FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
         if (imageUri != null) {
-            requireContext.contentResolver.takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            requireContext.contentResolver.takePersistableUriPermission(imageUri, FLAG_GRANT_READ_URI_PERMISSION)
         }
     }
 
@@ -132,8 +122,13 @@ class AddLocationFragment : Fragment() {
             }
         }
 
-        val menuHost : MenuHost = requireActivity()
-        menuHost.addMenuProvider(object: MenuProvider {
+        binding.include11.customTopBarLayout.setNavigationIcon(R.drawable.back)
+        binding.include11.customTopBarLayout.title = getString(R.string.locations_header)
+        binding.include11.customTopBarLayout.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.include11.customTopBarLayout.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.save_menu, menu)
             }

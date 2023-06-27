@@ -19,18 +19,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentLocationUpdateBinding
 import com.example.myapplication.databinding.FragmentUpdateCharacterBinding
-import com.example.myapplication.fragments.main.locations.LocationUpdateArgs
 import com.example.myapplication.model.Characters
-import com.example.myapplication.model.Location
 import com.example.myapplication.viewmodel.DataViewModel
 
 
@@ -88,9 +85,12 @@ class UpdateCharacter : Fragment() {
         }
 
 
-        val menuHost : MenuHost = requireActivity()
-
-        menuHost.addMenuProvider(object: MenuProvider {
+        binding.include5.customTopBarLayout.setNavigationIcon(R.drawable.back)
+        binding.include5.customTopBarLayout.title = getString(R.string.characters_header)
+        binding.include5.customTopBarLayout.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.include5.customTopBarLayout.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.save_menu, menu)
             }

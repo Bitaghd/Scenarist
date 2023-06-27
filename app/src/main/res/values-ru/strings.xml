@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Scenarist</string>
+    <string name="app_name">Сценарист</string>
     <string name="user_profile">Profile</string>
     <string name="main_screen">Главная</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -52,7 +52,7 @@
     <string name="project_header">Проект</string>
     <string name="genres_header">Жанры</string>
     <string name="characters_header">Персонажи</string>
-    <string name="locations_header">Докации</string>
+    <string name="locations_header">Локации</string>
     <string name="scene_header">Сцены</string>
 
     <!--    Hints-->
@@ -64,4 +64,12 @@
     <string name="bio_hint">Биография</string>
     <string name="desc_hint">Описание</string>
     <string name="location_hint">Локация</string>
+    <string name="create_project">Создать новый проект</string>
+    <string name="update_project">Обновите текущий проект</string>
+    <string name="details_title">Дополнительные материалы</string>
+    <string name="added_details_title">Созданные документы</string>
+    <string name="add_link">Добавить ссылку</string>
+    <string name="add_gallery">Добавить галерею</string>
+    <string name="add_textfile">Добавить текстовый файл</string>
+    <string name="links">Ссылки</string>
 </resources>

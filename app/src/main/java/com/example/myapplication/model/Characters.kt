@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(tableName = "character")
 data class Characters (
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val char_id: Int,
     val char_name: String,
     val char_alias: String,

@@ -5,17 +5,14 @@ import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentSceneDetailsBinding
 import com.example.myapplication.databinding.FragmentSceneUpdateBinding
-import com.example.myapplication.databinding.FragmentUpdateBinding
-import com.example.myapplication.model.Projects
 import com.example.myapplication.model.Scene
 import com.example.myapplication.viewmodel.DataViewModel
 
@@ -46,9 +43,15 @@ class SceneUpdate : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val menuHost : MenuHost = requireActivity()
 
-        menuHost.addMenuProvider(object: MenuProvider {
+        binding.include9.customTopBarLayout.setNavigationIcon(R.drawable.back)
+        binding.include9.customTopBarLayout.title = getString(R.string.scene_header)
+        binding.include9.customTopBarLayout.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
+
+        binding.include9.customTopBarLayout.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.save_menu, menu)
             }

@@ -9,7 +9,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -17,8 +16,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentCharacterDetailsBinding
-import com.example.myapplication.databinding.FragmentLocationDetailsBinding
-import com.example.myapplication.fragments.main.locations.LocationDetailsDirections
 import com.example.myapplication.model.Characters
 import com.example.myapplication.viewmodel.DataViewModel
 
@@ -53,8 +50,13 @@ class CharacterDetails : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val menuHost : MenuHost = requireActivity()
-        menuHost.addMenuProvider(object: MenuProvider {
+        binding.include4.customTopBarLayout.setNavigationIcon(R.drawable.back)
+        binding.include4.customTopBarLayout.title = getString(R.string.characters_header)
+        binding.include4.customTopBarLayout.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.include4.customTopBarLayout.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.edit_menu, menu)
             }

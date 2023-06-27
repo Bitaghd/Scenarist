@@ -9,15 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentMainBinding
 import com.example.myapplication.databinding.FragmentSceneBinding
-import com.example.myapplication.fragments.main.MainAdapter
 import com.example.myapplication.model.Scene
 import com.example.myapplication.viewmodel.DataViewModel
 
@@ -40,12 +39,26 @@ class SceneFragment : Fragment(), ScenesAdapter.RawClickListener {
         rv.adapter = adapter
         rv.layoutManager = LinearLayoutManager(requireContext())
 
+        rv.apply {
+            val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            divider.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider)!!)
+            addItemDecoration(divider)
+        }
+
+        binding.include6.customTopBarLayout.setNavigationIcon(R.drawable.back)
+        binding.include6.customTopBarLayout.title = getString(R.string.scene_header)
+        binding.include6.customTopBarLayout.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
         viewModel = ViewModelProvider(requireActivity()).get(DataViewModel::class.java)
 
         //Get the id of current project
+
         viewModel.currentProject.observe(viewLifecycleOwner, Observer { project->
             projectID = project.id
         })
+        Log.d(TAG, "Id: $projectID")
 
         //Get the list of all scenes in the project
 //        viewModel.getScenesInProject(projectID).observe(viewLifecycleOwner, Observer {scene->

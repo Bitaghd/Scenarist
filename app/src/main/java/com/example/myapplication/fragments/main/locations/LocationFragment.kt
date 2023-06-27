@@ -7,17 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentLocationBinding
-import com.example.myapplication.databinding.FragmentProjectDetailsBinding
-import com.example.myapplication.fragments.main.scenes.ScenesAdapter
 import com.example.myapplication.model.Location
-import com.example.myapplication.model.Projects
-import com.example.myapplication.model.Scene
 import com.example.myapplication.viewmodel.DataViewModel
 
 class LocationFragment : Fragment(), LocationsAdapter.RawClickListener {
@@ -35,11 +33,21 @@ class LocationFragment : Fragment(), LocationsAdapter.RawClickListener {
         _binding = FragmentLocationBinding.inflate(inflater, container, false)
 
 
-
+        binding.include10.customTopBarLayout.setNavigationIcon(R.drawable.back)
+        binding.include10.customTopBarLayout.title = getString(R.string.locations_header)
+        binding.include10.customTopBarLayout.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
         //val adapter = LocationsAdapter(this@LocationFragment)
         val rv = binding.LocationsList
         rv.adapter = adapter
         rv.layoutManager = LinearLayoutManager(requireContext())
+
+        rv.apply {
+            val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            divider.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider)!!)
+            addItemDecoration(divider)
+        }
 
         viewModel = ViewModelProvider(requireActivity()).get(DataViewModel::class.java)
 

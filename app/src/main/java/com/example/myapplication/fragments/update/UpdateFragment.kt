@@ -1,24 +1,18 @@
 package com.example.myapplication.fragments.update
 
-import android.app.AlertDialog
+
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
-import androidx.activity.addCallback
-import androidx.core.text.isDigitsOnly
-import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentAddProjectBinding
 import com.example.myapplication.databinding.FragmentUpdateBinding
 import com.example.myapplication.model.Projects
 import com.example.myapplication.viewmodel.DataViewModel
@@ -37,68 +31,48 @@ class UpdateFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(DataViewModel::class.java)
 
         _binding = FragmentUpdateBinding.inflate(inflater, container, false)
-//        binding.updProjectName.setText(args.currentProject.pr_name)
-//        binding.updProjectAuthor.setText(args.currentProject.author_name)
-//        binding.updProjectDate.setText(args.currentProject.date.toString())
-
-        binding.updButton.setOnClickListener{
-            updateItem()
-        }
+        setDataBefore(args.currentProject)
         // Inflate the layout for this fragment
         return binding.root
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val setDataObserver = Observer<Projects>{project->
-            binding.updProjectName.setText(project.pr_name)
-            binding.updProjectAuthor.setText(project.author_name)
-            binding.updProjectDate.setText(project.date.toString())
-        }
-        viewModel.currentProject.observe(viewLifecycleOwner, setDataObserver)
-
-        //currentProject = viewModel.currentProject
-        val menuHost : MenuHost = requireActivity()
-
-//        menuHost.addMenuProvider(object:MenuProvider{
-//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-//                menuInflater.inflate(R.menu.delete_menu, menu)
-//            }
-//
-//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-//                if (menuItem.itemId == R.id.delete_menu){
-//                    deleteProject()
-//                }
-//                return true
-//            }
-//        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    private fun setDataBefore(currentProject: Projects) {
+        binding.updProjectName.setText(currentProject.pr_name)
+        binding.updProjectAuthor.setText(currentProject.author_name)
+        binding.updProjectDate.setText(currentProject.date.toString())
     }
 
 
-//    private fun deleteProject() {
-//        val builder = AlertDialog.Builder(requireContext())
-//        builder.setPositiveButton("Yes"){_, _->
-//            viewModel.deleteProject(args.currentProject)
-//            Toast.makeText(
-//                requireContext(),
-//                "${args.currentProject.pr_name} successfully deleted!",
-//                Toast.LENGTH_SHORT).show()
-//            findNavController().navigate(R.id.action_updateFragment_to_mainFragment2)
-//        }
-//        builder.setNegativeButton("No"){_, _->
-//
-//        }
-//        builder.setTitle("Delete ${args.currentProject.pr_name}?")
-//        builder.setMessage("Do you want to delete ${args.currentProject.pr_name}?")
-//        builder.create().show()
-//    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+        binding.include16.customTopBarLayout.setNavigationIcon(R.drawable.back)
+        binding.include16.customTopBarLayout.title = getString(R.string.project_header)
+        binding.include16.customTopBarLayout.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
+
+        binding.include16.customTopBarLayout.addMenuProvider(object: MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.save_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                if (menuItem.itemId == R.id.save_menu){
+                    updateItem()
+                }
+                return true
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
 
     private fun updateItem(){
         val projectName = binding.updProjectName.text.toString()
         val authorName = binding.updProjectAuthor.text.toString()
         val date = Integer.parseInt(binding.updProjectDate.text.toString())
 
-        if (inputCheck(projectName, authorName, binding.updProjectDate.text)){
+        if (inputCheck(projectName, authorName, binding.updProjectDate.text.toString())){
             //Create project object
             val updatedProject = Projects(args.currentProject.id, projectName,authorName,date)
             //Update current project
@@ -115,8 +89,8 @@ class UpdateFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(projectName: String, authorName: String, date: Editable) : Boolean{
-        return !(TextUtils.isEmpty(projectName) || TextUtils.isEmpty(authorName) || date.isEmpty())
+    private fun inputCheck(projectName: String, authorName: String, date: String) : Boolean{
+        return !(TextUtils.isEmpty(projectName) || TextUtils.isEmpty(authorName) || TextUtils.isEmpty(date))
     }
 
     override fun onDestroyView() {
